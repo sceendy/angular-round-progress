@@ -12,7 +12,7 @@
         }
     </style>
 
-    <script src="../bower_components/explorer-canvas/excanvas.js"></script>
+    <!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
 
 </head>
 <body ng-controller="MainCtrl">
@@ -31,8 +31,8 @@
         };
 
         $scope.chartOptions = {
-            width: '400',
-            height: '400',
+            width: '500',
+            height: '500',
             circle: {
                 inner: {
                     width: '5',
@@ -64,18 +64,9 @@
 <p>Have a look at the source code to see an example.</p>
 
 <!-- You can see here that you can override the default settings of the directive (color, size, width, font, etc) -->
-<div round-progress ng-model="roundProgressData"
-     data-round-progress-width="500"
-     data-round-progress-height="500"
-     data-round-progress-outer-circle-width="40"
-     data-round-progress-inner-circle-width="10"
-     data-round-progress-outer-circle-radius="200"
-     data-round-progress-inner-circle-radius="140"
-     data-round-progress-label-font="100pt 'Arial'"
-     data-round-progress-outer-circle-background-color="#505769"
-     data-round-progress-outer-circle-foreground-color="#12eeb9"
-     data-round-progress-inner-circle-color="#505769"
-     data-round-progress-label-color="#fff"></div>
+<div round-progress
+    ng-model="roundProgressData"
+    ng-options="chartOptions"></div>
 
 <input type="number" ng-model="roundProgressData.label"/>
 </body>

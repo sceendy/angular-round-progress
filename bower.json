@@ -1,0 +1,26 @@
+{
+    "name": "angular-round-progress",
+    "main": "angular-round-progress.js",
+    "version": "0.0.1",
+    "dependencies": {
+        "explorer-canvas": "git://github.com/arv/ExplorerCanvas.git"
+    },
+    "homepage": "https://github.com/scatcher/angular-round-progress",
+    "authors": [
+        "Scott <github@scotthatcher.com>"
+    ],
+    "description": "Updated directive based on work from https://github.com/angular-directives/angular-round-progress-directive",
+    "keywords": [
+        "Angular",
+        "Directive",
+        "IE8"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ]
+}

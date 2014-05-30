@@ -77,12 +77,25 @@ angular.module('angular-round-progress', []).directive('roundProgress', [functio
                 }
 
                 // The label (inner number)
-                if (!!options.label) {
+                if (!!newValue.label) {
+                  var labelY = options.height / 12;
+
                   ctx.font = options.label.font;
                   ctx.textAlign = 'center';
                   ctx.textBaseline = 'middle';
                   ctx.fillStyle = options.label.color;
-                  ctx.fillText(newValue.label, x, y);
+                  ctx.fillText(newValue.label, x, (labelY * 5));
+                  ctx.stroke();
+
+                  // The caption (under inner number)
+                  if (!!newValue.caption) {
+                    ctx.font = options.caption.font;
+                    ctx.textAlign= 'center';
+                    ctx.textBaseline = 'hanging';
+                    ctx.fillStyle = options.caption.color;
+                    ctx.fillText(newValue.caption, x, (labelY * 7));
+                    ctx.stroke();
+                  }
                 }
 
                 // The "foreground" circle

@@ -8,8 +8,8 @@ angular.module('angular-round-progress', []).directive('roundProgress', [functio
         restrict: "A",
         replace: true,
         scope: {
-            ngOptions: '=',
-            ngModel: '='
+            rpOptions: '=',
+            rpModel: '='
         },
         link: function(scope, element, attrs) {
             var node = element[0];
@@ -39,7 +39,7 @@ angular.module('angular-round-progress', []).directive('roundProgress', [functio
             var options = {};
 
             //Include any custom options
-            jQuery.extend(true, options, defaults, scope.ngOptions || {});
+            jQuery.extend(true, options, defaults, scope.rpOptions || {});
 
             var canvas = document.createElement('canvas');
 
@@ -51,9 +51,9 @@ angular.module('angular-round-progress', []).directive('roundProgress', [functio
 
             canvas.setAttribute('width', options.width.toString());
             canvas.setAttribute('height', options.height.toString());
-            canvas.setAttribute('ng-model', scope.ngModel);
+            canvas.setAttribute('ng-model', scope.rpModel);
 
-            scope.$watch('ngModel', function (newValue, oldValue) {
+            scope.$watch('rpModel', function (newValue, oldValue) {
                 // Create the content of the canvas
                 var ctx = canvas.getContext('2d');
                 ctx.clearRect(0, 0, options.width, options.height);
@@ -68,18 +68,22 @@ angular.module('angular-round-progress', []).directive('roundProgress', [functio
                 ctx.stroke();
 
                 // The inner circle
-                ctx.beginPath();
-                ctx.arc(x, y, options.circle.inner.radius, 0, Math.PI * 2, false);
-                ctx.lineWidth = options.circle.inner.width;
-                ctx.strokeStyle = options.circle.inner.foregroundColor;
-                ctx.stroke();
+                if (!!options.circle.inner) {
+                  ctx.beginPath();
+                  ctx.arc(x, y, options.circle.inner.radius, 0, Math.PI * 2, false);
+                  ctx.lineWidth = options.circle.inner.width;
+                  ctx.strokeStyle = options.circle.inner.foregroundColor;
+                  ctx.stroke();
+                }
 
-                // The inner number
-                ctx.font = options.label.font;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillStyle = options.label.color;
-                ctx.fillText(newValue.label, x, y);
+                // The label (inner number)
+                if (!!options.label) {
+                  ctx.font = options.label.font;
+                  ctx.textAlign = 'center';
+                  ctx.textBaseline = 'middle';
+                  ctx.fillStyle = options.label.color;
+                  ctx.fillText(newValue.label, x, y);
+                }
 
                 // The "foreground" circle
                 var startAngle = -(Math.PI / 2);

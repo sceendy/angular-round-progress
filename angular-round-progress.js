@@ -78,13 +78,14 @@ angular.module('angular-round-progress', []).directive('roundProgress', [functio
 
                 // The label (inner number)
                 if (!!newValue.label) {
-                  var labelY = options.height / 12;
+                  var ymulti = options.height / 12;
+                  var labely = !!newValue.caption ? ymulti * 5 : ymulti * 6;
 
                   ctx.font = options.label.font;
                   ctx.textAlign = 'center';
                   ctx.textBaseline = 'middle';
                   ctx.fillStyle = options.label.color;
-                  ctx.fillText(newValue.label, x, (labelY * 5));
+                  ctx.fillText(newValue.label, x, labely);
                   ctx.stroke();
 
                   // The caption (under inner number)
@@ -93,7 +94,7 @@ angular.module('angular-round-progress', []).directive('roundProgress', [functio
                     ctx.textAlign= 'center';
                     ctx.textBaseline = 'hanging';
                     ctx.fillStyle = options.caption.color;
-                    ctx.fillText(newValue.caption, x, (labelY * 7));
+                    ctx.fillText(newValue.caption, x, (ymulti * 7));
                     ctx.stroke();
                   }
                 }

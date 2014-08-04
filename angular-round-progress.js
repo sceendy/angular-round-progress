@@ -97,6 +97,16 @@ angular.module('angular-round-progress', []).directive('roundProgress', [functio
                     ctx.fillText(newValue.caption, x, (ymulti * 7));
                     ctx.stroke();
                   }
+                  // The second caption (canvas doesn't allow multi-line)
+                  if (!!newValue.twocaption) {
+                    ctx.font = options.caption.font;
+                    ctx.textAlign= 'center';
+                    ctx.textBaseline = 'hanging';
+                    ctx.fillStyle = options.caption.color;
+                    ctx.fillText(newValue.twocaption, x, (ymulti * 8));
+                    ctx.stroke();
+                  }
+                }
                 }
 
                 // The "foreground" circle
